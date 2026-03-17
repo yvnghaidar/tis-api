@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TagController;
 
 Route::get('/filterByParam/{author}/{year}', [BookController::class, 'filterBooksByParam'])
     ->middleware('validate.year');
@@ -20,4 +23,18 @@ Route::prefix('books')->group(function(){
 
     Route::delete('/{id}',[BookController::class,'delete']);
 
+});
+
+Route::prefix('posts')->group(function () {
+    Route::post('/', [PostController::class, 'createPost']);
+    Route::get('/{id}', [PostController::class, 'getPostById']);
+    Route::put('/{id}/tag/{tagId}', [PostController::class, 'addTag']);
+});
+
+Route::prefix('comments')->group(function () {
+    Route::post('/', [CommentController::class, 'createComment']);
+});
+
+Route::prefix('tags')->group(function () {
+    Route::post('/', [TagController::class, 'createTag']);
 });
