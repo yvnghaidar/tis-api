@@ -50,4 +50,4 @@ class PostController extends Controller
             'message' => 'Tag added to post',
         ]);
     }
-}
+}   
